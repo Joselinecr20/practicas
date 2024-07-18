@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
+const db = require("../../models/index.js");
+const { op } = require("sequelize");
+
 router.post("/registrar", (req, res) => {
   const {
     nombre,
@@ -15,31 +18,40 @@ router.post("/registrar", (req, res) => {
     idestado,
   } = req.body;
 
-  console.log("recibido");
-  res.send(
-    `mascota recibida: ${nombre} \n fecha de ingreso: ${fecha_ingreso} \n tipo de mascota:${tipo_de_mascota} \n Edad aproximada:${edad_aproximada} \n Peso: ${peso} \n Vacunacion:${vacunacion} \n Desparacitacion: ${desparacitacion} \n Condicion de salud: ${condicion_de_salud} \n Genero: ${genero} \n Estado:${idestado}`
-  );
+  const mascotas = db.Mascotas.create({
+    nombre,
+    fecha_ingreso,
+    tipo_de_mascota,
+    edad_aproximada,
+    peso,
+    vacunacion,
+    desparacitacion,
+    condicion_de_salud,
+    genero,
+    idestado,
+  });
+
+  if (mascotas) {
+    res.send("mascota registrada");
+  } else {
+    res.send("error al registrar mascota");
+  }
 });
 
 router.post("/mostrar", (req, res) => {
   const { id } = req.body;
 
-  let response =
-    id == 1
-      ? {
-          nombre: "Neron",
-          fecha_ingreso: "12-5-2023",
-          edad_aproximada: "3",
-          peso: "5.5",
-          vacunacion: "completada",
-          desparacitacion: "completada",
-          condicion_de_salud: "estable",
-          genero: "Hembra",
-          idestado: "abandono",
-        }
-      : "mascota no existe";
+  const mascotas = db.Mascotas.findOne({
+    where: {
+      id,
+    },
+  });
 
-  res.send(response);
+  if (mascotas) {
+    res.send(mascotas);
+  } else {
+    res.send("error al mostrar mascota");
+  }
 });
 
 module.exports = router;
