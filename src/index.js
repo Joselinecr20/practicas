@@ -1,0 +1,11 @@
+import app from "./app";
+
+const PORT = process.env.PORT || 9000;
+
+const main = () => {
+  app.listen(PORT, () => {
+    console.log(`Server is running on ${PORT}`);
+  });
+};
+
+main();
