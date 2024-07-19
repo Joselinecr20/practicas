@@ -7,11 +7,11 @@ import mysql2 from "mysql2";
 const pool = createPool({
   host: "localhost",
   user: "root",
-  database: "llo_database",
+  database: "bienestar_animal",
 });
 
 // Set up Sequelize with MySQL dialect
-const sequelize = new Sequelize("llo_database", "root", "", {
+const sequelize = new Sequelize("bienestar_animal", "root", "", {
   host: "localhost",
   dialect: "mysql",
   dialectModule: mysql2,

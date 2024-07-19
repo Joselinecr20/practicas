@@ -1,61 +1,57 @@
 "use strict";
 
 module.exports = (sequelize, DataTypes) => {
-  const Mascotas = sequelize.define(
-    "Mascotas",
+  const Adoptadores = sequelize.define(
+    "Adoptadores",
     {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
+      dui: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      id_mascota: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       nombre: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      fecha_ingreso: {
-        type: DataTypes.DATE,
-        allowNull: false,
-      },
-      tipo_de_mascota: {
+      apellidos: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      edad_aproximada: {
+      edad: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      peso: {
-        type: DataTypes.DECIMAL(10, 0),
-        allowNull: false,
-      },
-      vacunacion: {
+      telefono: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      desparacitacion: {
-        type: DataTypes.BOOLEAN,
-      },
-      condicion_de_salud: {
+      direccion_de_residencia: {
         type: DataTypes.TEXT,
         allowNull: false,
       },
-      genero: {
+      mascotas: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-
-      idestado: {
-        type: DataTypes.INTEGER,
+      cantidad_de_mascotas: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
     },
     {
-      tableName: "mascotas",
+      tableName: "adoptadores",
       createdAt: "created_at",
       updatedAt: "updated_at",
     }
   );
 
-  return Mascotas;
+  return Adoptadores;
 };
